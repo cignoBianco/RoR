@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  desease: one
+  symptom: one
+
+two:
+  desease: two
+  symptom: two
