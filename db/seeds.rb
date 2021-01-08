@@ -6,12 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
-deseases = Desease.create([{ title: 'Desease 1', description: 'Description 1', body_part: 'HEAD'},{title: 'Desease 2', description: 'description 2', body_part: 'ARM'}, {title: 'Desease 3', description: 'Description 3', body_part: 'HEAD'}, {title: 'Desease 4', description: 'Description 4', body_part: 'Body_part 4'}])
 
-symptoms = Symptom.create([{title: 'Symptom 1', description: 'Description 1'}, {title: 'Symptom 2', description: 'Symptoms description 2'}])
+symptoms = Symptom.create([
+	{title: 'Symptom 1', description: 'Description 1'}, 
+	{title: 'Symptom 2', description: 'Symptoms description 2'},
+	{title: 'Symptom 3', description: 'Description 3'}, 
+	{title: 'Symptom 4', description: 'Symptoms description 4'}])
 
-desease_symptoms = Symptoms_of_deseases.create([{desease_id: 1, symptom_id: 1},
-  {desease_id: 1, symptom_id: 2},
-  {desease_id: 2, symptom_id: 3},
-  {desease_id: 3, symptom_id: 3},
-  {desease_id: 3, symptom_id: 1}])
+deseases = Desease.create([
+	{ title: 'Desease 1', description: 'Description 1', body_part: 'HEAD', symptom_ids: [symptoms[0].id, symptoms[2].id]},
+	{title: 'Desease 2', description: 'description 2', body_part: 'ARM', symptom_ids: [symptoms[1].id, symptoms[2].id]}, 
+	{title: 'Desease 3', description: 'Description 3', body_part: 'HEAD', symptom_ids: [symptoms[0].id, symptoms[1].id]}, 
+	{title: 'Desease 4', description: 'Description 4', body_part: 'Body_part 4'}])
