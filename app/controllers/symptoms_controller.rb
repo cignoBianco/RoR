@@ -1,5 +1,7 @@
 class SymptomsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   # Show all symptoms
   # GET
   # /sympoms

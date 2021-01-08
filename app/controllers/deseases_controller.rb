@@ -1,5 +1,7 @@
 class DeseasesController < ApplicationController
-  
+   
+  skip_before_action :verify_authenticity_token
+
   # Show all deseases
   # GET
   # /deseases
@@ -33,7 +35,7 @@ class DeseasesController < ApplicationController
     @desease = Desease.new(desease_params)
 
     if @desease.save
-      render json: @desease, status: :created
+      render json: @desease, status: :ok
     else
       render json: @desease.errors, status: :unprocessable_entity
     end
@@ -47,7 +49,7 @@ class DeseasesController < ApplicationController
     @desease = Desease.find(params[:id])
 
     if @desease.update(desease_params)
-      render json: @desease, status: :updated
+      render json: @desease, status: :ok
     else
       render json: @desease.errors, status: :unprocessable_entity
     end
