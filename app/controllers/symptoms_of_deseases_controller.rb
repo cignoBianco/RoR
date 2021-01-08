@@ -1,0 +1,2 @@
+class SymptomsOfDeseasesController < ApplicationController
+end

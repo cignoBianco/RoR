@@ -70,10 +70,16 @@ class SymptomsController < ApplicationController
   # GET
   # /desease-symptoms/:id
   def get_symptoms
+    begin
     @desease = Desease.find(params[:id])
-    @symptoms = @desease.symptoms
-  
-    render json: @symptoms
+
+      @symptoms = @desease.symptoms
+      render json: @symptoms
+    rescue ActiveRecord::RecordNotFound => e
+      render json: e, status: :unprocessable_entity
+    end
+ 
+    
   end
 
 

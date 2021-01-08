@@ -41,12 +41,31 @@ class DeseasesController < ApplicationController
     end
   end
 
+ 
+  # Add symptoms of desease
+  # POST
+  # /desease-symptoms/:id
+  def add_symptoms
+    @desease = Desease.find(params[:id])
+    #@symptoms = @desease.symptoms
+    #@desease.symptoms.create(id: params[:symptom_id])
+    @SOD = SymptomsOfDesease.create(desease_id: params[:id], symptom_id: params[:symptom_id]) 
+    @SOD.save
+
+    render @desease.symptoms
+  end
+
 
   # Update the desease
   # PUT & PATCH
   # /deseases/:id
   def update
     @desease = Desease.find(params[:id])
+
+    for id in params[:symptoms_id] do
+    @SOD = SymptomsOfDesease.find_or_create_by(desease_id: params[:id], symptom_id: id) 
+    end
+
 
     if @desease.update(desease_params)
       render json: @desease, status: :ok
@@ -55,7 +74,7 @@ class DeseasesController < ApplicationController
     end
   end
 
-
+  
   # Delete a desease
   # DELETE
   # /deseases/:id
@@ -70,7 +89,7 @@ class DeseasesController < ApplicationController
   private
     # Desease params.
     def desease_params
-      params.require(:desease).permit(:title, :body_part, :description)
+      params.require(:desease).permit(:title, :body_part, :description, symptoms_id: [])
     end
 
 end
